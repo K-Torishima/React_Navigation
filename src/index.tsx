@@ -1,8 +1,13 @@
 import React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity, Modal} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {useNavigation, NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+// import {createStackNavigator} from '@react-navigation/stack';
+import {
+  useNavigation,
+  NavigationContainer,
+  DrawerActions,
+} from '@react-navigation/native';
+// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 const styles = StyleSheet.create({
   conteiner1: {
@@ -48,24 +53,13 @@ const styles = StyleSheet.create({
 //   );
 // }
 
-// TabBarControllerの実装
-// 画面1
-function Main() {
-  return (
-    <View style={styles.conteiner1}>
-      <Text style={styles.font1}>Main画面</Text>
-    </View>
-  );
-}
-
-// 画面2
-function Sub() {
-  return (
-    <View style={styles.conteiner2}>
-      <Text style={styles.font1}>Sub画面</Text>
-    </View>
-  );
-}
+// function Sub() {
+//     return (
+//       <View style={styles.conteiner2}>
+//         <Text style={styles.font1}>Sub画面</Text>
+//       </View>
+//     );
+//   }
 
 // // Stackの実装方法 //
 // const Stack = createStackNavigator();
@@ -86,22 +80,85 @@ function Sub() {
 //   );
 // }
 
-// Tabの実装
-const Tab = createBottomTabNavigator();
+// TabBarControllerの実装
 
-function TabNavigator() {
+// 画面1
+// function Main() {
+//   return (
+//     <View style={styles.conteiner1}>
+//       <Text style={styles.font1}>Main画面</Text>
+//     </View>
+//   );
+// }
+
+// // 画面2
+// function Sub() {
+//   return (
+//     <View style={styles.conteiner2}>
+//       <Text style={styles.font1}>Sub画面</Text>
+//     </View>
+//   );
+// }
+
+// // Tabの実装
+// const Tab = createBottomTabNavigator();
+
+// function TabNavigator() {
+//   return (
+//     <Tab.Navigator>
+//       <Tab.Screen name="Main" component={Main} />
+//       <Tab.Screen name="Sub" component={Sub} />
+//     </Tab.Navigator>
+//   );
+// }
+
+// export default function () {
+//   return (
+//     <NavigationContainer>
+//       <TabNavigator />
+//     </NavigationContainer>
+//   );
+// }
+
+// Drawer (サイドメニュー)
+function Main() {
+  const {dispatch} = useNavigation();
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Main" component={Main} />
-      <Tab.Screen name="Sub" component={Sub} />
-    </Tab.Navigator>
+    <View style={styles.conteiner1}>
+      <Text>Main</Text>
+      <TouchableOpacity onPress={() => dispatch(DrawerActions.openDrawer())}>
+        <Text>open drawer</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function Sub() {
+  const {dispatch} = useNavigation();
+  return (
+    <View style={styles.conteiner2}>
+      <Text>Sub</Text>
+      <TouchableOpacity onPress={() => dispatch(DrawerActions.openDrawer())}>
+        <Text>open drawer</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Main" component={Main} />
+      <Drawer.Screen name="Sub" component={Sub} />
+    </Drawer.Navigator>
   );
 }
 
 export default function () {
   return (
     <NavigationContainer>
-      <TabNavigator />
+      <DrawerNavigator />
     </NavigationContainer>
   );
 }
