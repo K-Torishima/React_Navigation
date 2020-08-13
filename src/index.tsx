@@ -8,6 +8,7 @@ import {
 } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 // NavigationControllerの場合の実装
 // 画面1
@@ -155,7 +156,47 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 //   );
 // }
 
-function Main() {}
+function Main() {
+  const {navigate} = useNavigation();
+  return (
+    <View style={styles.conteiner1}>
+      <TouchableOpacity
+        onPress={() =>
+          navigate('Sub', {
+            title: `${Date.now()}`,
+          })
+        }>
+        <Text> go to sub</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function Sub() {
+  return (
+    <View style={styles.conteiner1}>
+      <Text> sign up or login</Text>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+function StackNavigator() {
+  return (
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name="Main" component={Main} />
+      <Stack.Screen name="Sub" component={Sub} />
+    </Stack.Navigator>
+  );
+}
+
+export default function () {
+  return (
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
+  );
+}
 
 const styles = StyleSheet.create({
   conteiner1: {
