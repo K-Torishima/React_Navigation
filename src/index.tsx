@@ -9,57 +9,32 @@ import {
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-const styles = StyleSheet.create({
-  conteiner1: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'lightgray',
-  },
-  conteiner2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'gray',
-  },
-  font1: {
-    color: 'black',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  font2: {
-    color: 'red',
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-});
-
 // NavigationControllerの場合の実装
 // 画面1
-function Main() {
-  // 画面定義
-  const {navigate} = useNavigation();
-  return (
-    <View style={styles.conteiner1}>
-      <Text style={styles.font1}>ここはMain画面です</Text>
-      <TouchableOpacity
-        onPress={() => {
-          // ここでナビゲートしているfunction名いれる　ボタン遷移　onPressはIBAction
-          navigate('Sub');
-        }}>
-        <Text style={styles.font2}>sub画面へ遷移</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+// function Main() {
+//   // 画面定義
+//   const {navigate} = useNavigation();
+//   return (
+//     <View style={styles.conteiner1}>
+//       <Text style={styles.font1}>ここはMain画面です</Text>
+//       <TouchableOpacity
+//         onPress={() => {
+//           // ここでナビゲートしているfunction名いれる　ボタン遷移　onPressはIBAction
+//           navigate('Sub');
+//         }}>
+//         <Text style={styles.font2}>sub画面へ遷移</Text>
+//       </TouchableOpacity>
+//     </View>
+//   );
+// }
 
-function Sub() {
-  return (
-    <View style={styles.conteiner2}>
-      <Text style={styles.font1}>Sub画面</Text>
-    </View>
-  );
-}
+// function Sub() {
+//   return (
+//     <View style={styles.conteiner2}>
+//       <Text style={styles.font1}>Sub画面</Text>
+//     </View>
+//   );
+// }
 
 // Stackの実装方法 //
 // Optionsの定義
@@ -77,25 +52,25 @@ function Sub() {
 //   );
 // }
 
-// Optionsの定義
-// Screenに記載
-const Stack = createStackNavigator();
-function StackNavigator() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Main" component={Main} options={{title: 'Main'}} />
-      <Stack.Screen name="Sub" component={Sub} options={{title: 'Sub'}} />
-    </Stack.Navigator>
-  );
-}
+// // Optionsの定義
+// // Screenに記載
+// const Stack = createStackNavigator();
+// function StackNavigator() {
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen name="Main" component={Main} options={{title: 'Main'}} />
+//       <Stack.Screen name="Sub" component={Sub} options={{title: 'Sub'}} />
+//     </Stack.Navigator>
+//   );
+// }
 
-export default function () {
-  return (
-    <NavigationContainer onStateChange={(newState) => console.log(newState)}>
-      <StackNavigator />
-    </NavigationContainer>
-  );
-}
+// export default function () {
+//   return (
+//     <NavigationContainer onStateChange={(newState) => console.log(newState)}>
+//       <StackNavigator />
+//     </NavigationContainer>
+//   );
+// }
 
 // TabBarControllerの実装
 
@@ -179,3 +154,30 @@ export default function () {
 //     </NavigationContainer>
 //   );
 // }
+
+function Main() {}
+
+const styles = StyleSheet.create({
+  conteiner1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'lightgray',
+  },
+  conteiner2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'gray',
+  },
+  font1: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  font2: {
+    color: 'red',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+});
