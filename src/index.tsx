@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-// import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {
   useNavigation,
   NavigationContainer,
   DrawerActions,
 } from '@react-navigation/native';
-// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 const styles = StyleSheet.create({
@@ -35,50 +35,67 @@ const styles = StyleSheet.create({
 });
 
 // NavigationControllerの場合の実装
-// // 画面1
-// function Main() {
-//   // 画面定義
-//   const {navigate} = useNavigation();
-//   return (
-//     <View style={styles.conteiner1}>
-//       <Text style={styles.font1}>ここはMain画面です</Text>
-//       <TouchableOpacity
-//         onPress={() => {
-//           // ここでナビゲートしているfunction名いれる　ボタン遷移　onPressはIBAction
-//           navigate('Sub');
-//         }}>
-//         <Text style={styles.font2}>sub画面へ遷移</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// }
+// 画面1
+function Main() {
+  // 画面定義
+  const {navigate} = useNavigation();
+  return (
+    <View style={styles.conteiner1}>
+      <Text style={styles.font1}>ここはMain画面です</Text>
+      <TouchableOpacity
+        onPress={() => {
+          // ここでナビゲートしているfunction名いれる　ボタン遷移　onPressはIBAction
+          navigate('Sub');
+        }}>
+        <Text style={styles.font2}>sub画面へ遷移</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
-// function Sub() {
-//     return (
-//       <View style={styles.conteiner2}>
-//         <Text style={styles.font1}>Sub画面</Text>
-//       </View>
-//     );
-//   }
+function Sub() {
+  return (
+    <View style={styles.conteiner2}>
+      <Text style={styles.font1}>Sub画面</Text>
+    </View>
+  );
+}
 
-// // Stackの実装方法 //
+// Stackの実装方法 //
+// Optionsの定義
+// Navigator記載
 // const Stack = createStackNavigator();
 // function StackNavigator() {
 //   return (
-//     <Stack.Navigator>
+//     <Stack.Navigator
+//       screenOptions={{
+//         title: 'hello',
+//       }}>
 //       <Stack.Screen name="Main" component={Main} />
 //       <Stack.Screen name="Sub" component={Sub} />
 //     </Stack.Navigator>
 //   );
 // }
 
-// export default function () {
-//   return (
-//     <NavigationContainer onStateChange={(newState) => console.log(newState)}>
-//       <StackNavigator />
-//     </NavigationContainer>
-//   );
-// }
+// Optionsの定義
+// Screenに記載
+const Stack = createStackNavigator();
+function StackNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Main" component={Main} options={{title: 'Main'}} />
+      <Stack.Screen name="Sub" component={Sub} options={{title: 'Sub'}} />
+    </Stack.Navigator>
+  );
+}
+
+export default function () {
+  return (
+    <NavigationContainer onStateChange={(newState) => console.log(newState)}>
+      <StackNavigator />
+    </NavigationContainer>
+  );
+}
 
 // TabBarControllerの実装
 
@@ -120,45 +137,45 @@ const styles = StyleSheet.create({
 //   );
 // }
 
-// Drawer (サイドメニュー)
-function Main() {
-  const {dispatch} = useNavigation();
-  return (
-    <View style={styles.conteiner1}>
-      <Text>Main</Text>
-      <TouchableOpacity onPress={() => dispatch(DrawerActions.openDrawer())}>
-        <Text>open drawer</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+// // Drawer (サイドメニュー)
+// function Main() {
+//   const {dispatch} = useNavigation();
+//   return (
+//     <View style={styles.conteiner1}>
+//       <Text>Main</Text>
+//       <TouchableOpacity onPress={() => dispatch(DrawerActions.openDrawer())}>
+//         <Text>open drawer</Text>
+//       </TouchableOpacity>
+//     </View>
+//   );
+// }
 
-function Sub() {
-  const {dispatch} = useNavigation();
-  return (
-    <View style={styles.conteiner2}>
-      <Text>Sub</Text>
-      <TouchableOpacity onPress={() => dispatch(DrawerActions.openDrawer())}>
-        <Text>open drawer</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+// function Sub() {
+//   const {dispatch} = useNavigation();
+//   return (
+//     <View style={styles.conteiner2}>
+//       <Text>Sub</Text>
+//       <TouchableOpacity onPress={() => dispatch(DrawerActions.openDrawer())}>
+//         <Text>open drawer</Text>
+//       </TouchableOpacity>
+//     </View>
+//   );
+// }
 
-const Drawer = createDrawerNavigator();
-function DrawerNavigator() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Main" component={Main} />
-      <Drawer.Screen name="Sub" component={Sub} />
-    </Drawer.Navigator>
-  );
-}
+// const Drawer = createDrawerNavigator();
+// function DrawerNavigator() {
+//   return (
+//     <Drawer.Navigator>
+//       <Drawer.Screen name="Main" component={Main} />
+//       <Drawer.Screen name="Sub" component={Sub} />
+//     </Drawer.Navigator>
+//   );
+// }
 
-export default function () {
-  return (
-    <NavigationContainer>
-      <DrawerNavigator />
-    </NavigationContainer>
-  );
-}
+// export default function () {
+//   return (
+//     <NavigationContainer>
+//       <DrawerNavigator />
+//     </NavigationContainer>
+//   );
+// }
