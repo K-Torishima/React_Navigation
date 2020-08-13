@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {useNavigation, NavigationContainer} from '@react-navigation/native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation, NavigationContainer } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   conteiner: {
